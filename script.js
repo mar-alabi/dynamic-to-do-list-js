@@ -18,8 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
       removeBtn.onclick = function () {
         listItem.remove();
       };
-      listItem.append(removeBtn);
-      taskList.append(listItem);
+      listItem.appendChild(removeBtn);
+      taskList.appendChild(listItem);
       taskInput.value = "";
     }
   }
