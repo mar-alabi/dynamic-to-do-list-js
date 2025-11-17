@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // event listeners  for the DOM elements
   addButton.addEventListener("click", addTask);
-  taskInput.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
+  taskInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
       addTask();
     }
   });
