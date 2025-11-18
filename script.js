@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let taskArray = [];
 
   // function to load saved tasks
-  function loadSavedTasks() {
+  function loadTasks() {
     let savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
       taskArray = JSON.parse(savedTasks);
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       taskList.appendChild(listItem);
     }
   }
-  loadSavedTasks();
+  loadTasks();
   //function to add tasks
   function addTask() {
     let taskText = taskInput.value.trim();
