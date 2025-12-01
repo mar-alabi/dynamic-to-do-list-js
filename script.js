@@ -4,7 +4,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const addButton = document.getElementById("add-task-btn");
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
-
+  let taskArray = [];
+  // check localStorage for existing tasks and populate them on the page if they exist
+  let savedTasks = localStorage.getItem("tasks");
+  if (savedTasks) {
+    taskArray = JSON.parse(savedTasks);
+    for (let task of taskArray) {
+      populateTasks(task);
+    }
+  }
+  //function to add tasks to taskList
+  function populateTasks(task) {
+    let listItem = document.createElement("li");
+    listItem.textContent = task;
+    // create a new button for removing the task assign an onclick to it which removes the <li> element from the task list
+    let removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.classList.add("remove-btn");
+    removeButton.onclick = function () {
+      listItem.remove();
+      let taskIndex = taskArray.indexOf(task);
+      if (taskIndex !== -1) {
+        taskArray.splice(taskIndex, 1);
+      }
+      localStorage.setItem("tasks", JSON.stringify(taskArray));
+    };
+    // append the remove button to the <li> element
+    listItem.appendChild(removeButton);
+    // append the <li> element to the task list
+    taskList.appendChild(listItem);
+  }
   // create addTask function
   function addTask() {
     // retrieve and trim the value of the task input field and store it in a variable called taskText
@@ -13,20 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (taskText === "") {
       alert("Please enter a task");
     } else {
-      // if taskText is not empty, create a new <li> element and set its textContent to tasText value
-      let listItem = document.createElement("li");
-      listItem.textContent = taskText;
-      // create a new button for removing the task assign an onclikc to it which removes the <li> element from the task list
-      let removeButton = document.createElement("button");
-      removeButton.textContent = "Remove";
-      removeButton.classList.add("remove-btn");
-      removeButton.onclick = function () {
-        listItem.remove();
-      };
-      // append the remove button to the <li> element
-      listItem.appendChild(removeButton);
-      // append the <li> element to the task list
-      taskList.appendChild(listItem);
+      populateTasks(taskText);
+      taskArray.push(taskText);
+      let savedTasks = JSON.stringify(taskArray);
+      localStorage.setItem("tasks", savedTasks);
       // clear the input field
       taskInput.value = "";
     }
