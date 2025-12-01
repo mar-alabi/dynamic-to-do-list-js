@@ -5,14 +5,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
   let taskArray = [];
+
   // check localStorage for existing tasks and populate them on the page if they exist
-  let savedTasks = localStorage.getItem("tasks");
-  if (savedTasks) {
-    taskArray = JSON.parse(savedTasks);
-    for (let task of taskArray) {
-      populateTasks(task);
+  function loadTasks() {
+    let savedTasks = localStorage.getItem("tasks");
+    if (savedTasks) {
+      taskArray = JSON.parse(savedTasks);
+      for (let task of taskArray) {
+        populateTasks(task);
+      }
     }
   }
+  loadTasks();
   //function to add tasks to taskList
   function populateTasks(task) {
     let listItem = document.createElement("li");
