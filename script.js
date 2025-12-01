@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // retrieve and trim the value of the task input field and store it in a variable called taskText
     const taskText = taskInput.value.trim();
     // if taskText is  empty alert the user to enter a task
-    if (taskText.value === "") {
+    if (taskText === "") {
       alert("Please enter a task");
     } else {
       // if taskText is not empty, create a new <li> element and set its textContent to tasText value
@@ -42,5 +42,4 @@ document.addEventListener("DOMContentLoaded", () => {
       addTask();
     }
   });
-  // invoke the addTask function on DOMContentLoaded
 });
