@@ -36,6 +36,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // add an event listener to the add task button that calls addTask function when clicked
   addButton.addEventListener("click", addTask);
   // add an event listener to the task input field to allow tasks to be added when the 'enter' button is pressed
-  // check if 'event.key' is 'enter' before calling addTask
+  taskInput.addEventListener("keypress", (e) => {
+    // check if 'event.key' is 'enter' before calling addTask
+    if (e.key === "Enter") {
+      addTask();
+    }
+  });
   // invoke the addTask function on DOMContentLoaded
 });
